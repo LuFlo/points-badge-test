@@ -1,18 +1,23 @@
 import { User } from './types/user.interface';
 import { Icon } from './types/icon.enum';
 
+type BadgeTest = (solutionCount: number) => boolean;
+
+const testLowerBound = (solutionCount: number, lowerBound: number): boolean => 
+  (solutionCount >= lowerBound);
+
+let badgeTypes: {icon: Icon, bound: number}[] = [
+  {icon: Icon.BADGE_GOLD, bound: 50},
+  {icon: Icon.BADGE_SILVER, bound: 25},
+  {icon: Icon.BADGE_BRONZE, bound: 5},
+];
+
 export const getUsersBadge = ( user: User ): Icon | null => {
-  let badge = null;
-  switch ( true ) {
-    case ( user.solutionCount >= 5 && user.solutionCount < 25 ):
-      badge = Icon.BADGE_BRONZE;
-      break;
-    case ( user.solutionCount >= 25 && user.solutionCount < 50 ):
-      badge = Icon.BADGE_SILVER;
-      break;
-    case ( user.solutionCount >= 50 ):
-      badge = Icon.BADGE_GOLD;
-      break;
-  }
+  let badge: Icon | null = null;
+  for (var badgeType of badgeTypes) {
+    if (testLowerBound(user.solutionCount, badgeType.bound)) {
+      return badgeType.icon;   
+    }
+  };
   return badge;
 };
