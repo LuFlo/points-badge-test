@@ -1,6 +1,6 @@
 import { User } from './types/user.interface';
 import { Icon } from './types/icon.enum';
-import { getAllUser } from './user-store';
+import { getAllUser, getRandomInt } from './user-store';
 import { emulateLongProcess } from './emulate-long-process';
 
 type BadgeTest = (solutionCount: number) => boolean;
@@ -18,14 +18,23 @@ let badgeTypes: {icon: Icon, lowerBound: number, upperBound: number}[] = [
   {icon: Icon.BADGE_BAD_ASS, lowerBound: -Infinity, upperBound: 0},
 ];
 
+
 export const getUsersBadge = async ( user: User ): Promise<Icon | null> => {
   let badge: Icon | null = null;
+  let success = false;
+  while (!success) {
+    try {
+      await emulateLongProcess();
+      success = true;
+    } catch {
+      await new Promise(r => setTimeout(r, getRandomInt(1000)));
+    }
+  }
   for (var badgeType of badgeTypes) {
     if (testBounds(user.solutionCount, badgeType.lowerBound, badgeType.upperBound)) {
       return badgeType.icon;
     }
   };
-  await emulateLongProcess();
   return badge;
 };
 
