@@ -20,12 +20,12 @@ let badgeTypes: {icon: Icon, lowerBound: number, upperBound: number}[] = [
 
 export const getUsersBadge = async ( user: User ): Promise<Icon | null> => {
   let badge: Icon | null = null;
+  await emulateLongProcess();
   for (var badgeType of badgeTypes) {
     if (testBounds(user.solutionCount, badgeType.lowerBound, badgeType.upperBound)) {
       return badgeType.icon;
     }
   };
-  await emulateLongProcess();
   return badge;
 };
 
