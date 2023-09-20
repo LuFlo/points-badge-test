@@ -4,9 +4,9 @@ import { Icon } from './types/icon.enum';
 type BadgeTest = (solutionCount: number) => boolean;
 
 let badgeTypes: {icon: Icon, testFunction: BadgeTest}[] = [
-  {icon: Icon.BADGE_BRONZE,  testFunction: solutionCount => solutionCount >= 5 && solutionCount < 25},
-  {icon: Icon.BADGE_SILVER,  testFunction: solutionCount => solutionCount >= 25 && solutionCount < 50},
-  {icon: Icon.BADGE_GOLD,  testFunction: solutionCount => solutionCount >= 50}
+  {icon: Icon.BADGE_GOLD,  testFunction: solutionCount => solutionCount >= 50},
+  {icon: Icon.BADGE_SILVER,  testFunction: solutionCount => solutionCount >= 25},
+  {icon: Icon.BADGE_BRONZE,  testFunction: solutionCount => solutionCount >= 5},
 ];
 
 export const getUsersBadge = ( user: User ): Icon | null => {
