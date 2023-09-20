@@ -3,16 +3,19 @@ import { Icon } from './types/icon.enum';
 
 type BadgeTest = (solutionCount: number) => boolean;
 
-let badgeTypes: {icon: Icon, testFunction: BadgeTest}[] = [
-  {icon: Icon.BADGE_GOLD,  testFunction: solutionCount => solutionCount >= 50},
-  {icon: Icon.BADGE_SILVER,  testFunction: solutionCount => solutionCount >= 25},
-  {icon: Icon.BADGE_BRONZE,  testFunction: solutionCount => solutionCount >= 5},
+const testLowerBound = (solutionCount: number, lowerBound: number): boolean => 
+  (solutionCount >= lowerBound);
+
+let badgeTypes: {icon: Icon, bound: number}[] = [
+  {icon: Icon.BADGE_GOLD, bound: 50},
+  {icon: Icon.BADGE_SILVER, bound: 25},
+  {icon: Icon.BADGE_BRONZE, bound: 5},
 ];
 
 export const getUsersBadge = ( user: User ): Icon | null => {
   let badge: Icon | null = null;
   for (var badgeType of badgeTypes) {
-    if (badgeType.testFunction(user.solutionCount)) {
+    if (testLowerBound(user.solutionCount, badgeType.bound)) {
       return badgeType.icon;   
     }
   };
