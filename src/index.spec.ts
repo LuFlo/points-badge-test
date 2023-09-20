@@ -5,27 +5,27 @@ import { User } from './types/user.interface';
 describe('getUsersBadge', () => {
 
   it(`get Gold`, function () {
-    expect(getUsersBadge(getUserMock(100))).toEqual(Icon.BADGE_GOLD);
-    expect(getUsersBadge(getUserMock(50))).toEqual(Icon.BADGE_GOLD);
-    expect(getUsersBadge(getUserMock(1000000))).toEqual(Icon.BADGE_GOLD);
+    getUsersBadge(getUserMock(100)).then(res => expect(res).toEqual(Icon.BADGE_GOLD));
+    getUsersBadge(getUserMock(50)).then(res => expect(res).toEqual(Icon.BADGE_GOLD));
+    getUsersBadge(getUserMock(1000000)).then(res => expect(res).toEqual(Icon.BADGE_GOLD));
   });
 
   it(`get Silver`, function () {
-    expect(getUsersBadge(getUserMock(25))).toEqual(Icon.BADGE_SILVER);
-    expect(getUsersBadge(getUserMock(49))).toEqual(Icon.BADGE_SILVER);
-    expect(getUsersBadge(getUserMock(30))).toEqual(Icon.BADGE_SILVER);
+    getUsersBadge(getUserMock(25)).then(res => expect(res).toEqual(Icon.BADGE_SILVER));
+    getUsersBadge(getUserMock(49)).then(res => expect(res).toEqual(Icon.BADGE_SILVER));
+    getUsersBadge(getUserMock(30)).then(res => expect(res).toEqual(Icon.BADGE_SILVER));
   });
 
   it(`get Bronze`, function () {
-    expect(getUsersBadge(getUserMock(5))).toEqual(Icon.BADGE_BRONZE);
-    expect(getUsersBadge(getUserMock(24))).toEqual(Icon.BADGE_BRONZE);
-    expect(getUsersBadge(getUserMock(10))).toEqual(Icon.BADGE_BRONZE);
+    getUsersBadge(getUserMock(5)).then(res => expect(res).toEqual(Icon.BADGE_BRONZE));
+    getUsersBadge(getUserMock(24)).then(res => expect(res).toEqual(Icon.BADGE_BRONZE));
+    getUsersBadge(getUserMock(10)).then(res => expect(res).toEqual(Icon.BADGE_BRONZE));
   });
 
   it(`get no Icon`, function () {
-    expect(getUsersBadge(getUserMock(4))).toEqual(null);
-    expect(getUsersBadge(getUserMock(-100))).toEqual(null);
-    expect(getUsersBadge(getUserMock(0))).toEqual(null);
+    getUsersBadge(getUserMock(4)).then(res => expect(res).toEqual(null));
+    getUsersBadge(getUserMock(-100)).then(res => expect(res).toEqual(null));
+    getUsersBadge(getUserMock(0)).then(res => expect(res).toEqual(null));
   });
 
 });
