@@ -12,7 +12,7 @@ let badgeTypes: {icon: Icon, bound: number}[] = [
   {icon: Icon.BADGE_BRONZE, bound: 5},
 ];
 
-export const getUsersBadge = ( user: User ): Icon | null => {
+export const getUsersBadge = async ( user: User ): Promise<Icon | null> => {
   let badge: Icon | null = null;
   for (var badgeType of badgeTypes) {
     if (testLowerBound(user.solutionCount, badgeType.bound)) {
