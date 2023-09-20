@@ -47,9 +47,8 @@ describe('getUsersBadge', () => {
   });
 
   it(`get no Icon`, async () => {
-    await getUsersBadge(getUserMock(4)).then(res => expect(res).toEqual(null));
-    await getUsersBadge(getUserMock(-100)).then(res => expect(res).toEqual(null));
     await getUsersBadge(getUserMock(0)).then(res => expect(res).toEqual(null));
+    await getUsersBadge(getUserMock(1)).then(res => expect(res).toEqual(null));
   });
 
 });
