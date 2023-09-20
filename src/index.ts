@@ -18,18 +18,17 @@ let badgeTypes: {icon: Icon, lowerBound: number, upperBound: number}[] = [
   {icon: Icon.BADGE_BAD_ASS, lowerBound: -Infinity, upperBound: 0},
 ];
 
+let workers = 0;
+let maxWorkers = 19;
 
 export const getUsersBadge = async ( user: User ): Promise<Icon | null> => {
   let badge: Icon | null = null;
-  let success = false;
-  while (!success) {
-    try {
-      await emulateLongProcess();
-      success = true;
-    } catch {
-      await new Promise(r => setTimeout(r, getRandomInt(1000)));
-    }
+  
+  while (workers > maxWorkers) {
+    await new Promise(r => setTimeout(r, 100));
   }
+  workers++;
+  await emulateLongProcess().then(() => workers--);
   for (var badgeType of badgeTypes) {
     if (testBounds(user.solutionCount, badgeType.lowerBound, badgeType.upperBound)) {
       return badgeType.icon;
